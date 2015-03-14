@@ -6,10 +6,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/createAccount', function(req, res, next) {
-  res.render('createAccount', { title: 'Express' });
-});
-
 router.get('/users', function(req, res, next) {
 	var db = req.db;
 	var collection = db.get("usercollection");
