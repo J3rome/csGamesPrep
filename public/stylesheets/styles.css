@@ -9,11 +9,6 @@ body{
 	margin-left: 34%;
 	margin-right: 34%;
 }
-.centerCreateAccount{
-	float: none;
-	margin-left: 20%;
-	margin-right: 20%;
-}
 #username,#name,#password,#age,#tags,#sex,#description,#interestedIn,#email{
 	margin: 10px;
 }
