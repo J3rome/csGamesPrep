@@ -1,14 +1,26 @@
 var express = require('express');
 var session = require('express-session');
 var router = express.Router();
-
+var passGenerator = require('password-hash');
 
 var currentSession;
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	if(currentSession && currentSession.email){
+		res.redirect("/profile");
+	}else{
+		res.redirect("/login");
+	}
   res.render('index', { title: 'Express' });
 });
 
+router.get('/profile', function(req, res, next) {
+	if(currentSession && currentSession.email){
+		res.send("Profile Page");
+	}else{
+		res.redirect("/login");
+	}
+});
 
 router.get('/users', function(req, res, next) {
 	if(currentSession && currentSession.email){
@@ -36,6 +48,9 @@ router.post('/users', function(req, res, next){
 	if(!req.body.name){
 		// ERROR NO NAME
 		res.send("Missing Parameter");
+	}else if(!req.body.username){
+		// ERROR NO PASSWORD
+		res.send("Missing Parameter");
 	}else if(!req.body.password){
 		// ERROR NO PASSWORD
 		res.send("Missing Parameter");
@@ -60,8 +75,9 @@ router.post('/users', function(req, res, next){
 		var db = req.db;
 		var collection = db.get("users");
 
-		var user = { 	name : req.body.name,
-						password: req.body.password,
+		var user = { 	username : req.body.username,
+						name : req.body.name,
+						password: passGenerator.generate(req.body.password),
 						email: req.body.email,
 						age : req.body.age,
 						sex : req.body.sex,
@@ -75,20 +91,25 @@ router.post('/users', function(req, res, next){
 	}
 });
 
-router.delete('/users/:id', function(req,res,next){
-	if(!req.query.id){
+router.delete('/users/:username', function(req,res,next){
+	// NEED SECURITY ON THIS... Ain't nobody got time for that
+	if(!req.query.username){
 		var db = req.db;
 		var collection = db.get("users");
-		collection.remove({_id:req.params.id}, {}, function(err,numberOfRemovedDocs){
-			res.send("removed " + numberOfRemovedDocs + " docs");
+		collection.remove({usename:req.query.username}, {}, function(err,numberOfRemovedDocs){
+			res.send("removed " + numberOfRemovedDocs + " users");
 		})
 	}else{
 		res.send("Missing Parameter");
 	}
 });
 
+router.get('/login', function(req,res,next){
+	res.send("login page");
+});
+
 router.post('/login', function(req,res,next){
-	if(!req.body.email){
+	if(!req.body.username){
 		// ERROR NO EMAIL
 		res.send("Missing Parameter");
 	}else if(!req.body.password){
@@ -96,16 +117,20 @@ router.post('/login', function(req,res,next){
 		res.send("Missing Parameter");
 	}else{
 		currentSession = req.session;
-		currentSession.email = req.body.email;
+		currentSession.username = req.body.username;
 		// Everything there
 		var db = req.db;
 		var collection = db.get("users");
 
-		collection.findOne({email : req.body.email}, function(err, user){
-			if(user.password == req.body.password){
-				res.send("User logged in !");
+		collection.findOne({username : req.body.username}, function(err, user){
+			if(user){
+				if(passGenerator.verify(req.body.password, user.password)){
+					res.send("User logged in !");
+				}else{
+					res.send("Wrong Password");
+				}
 			}else{
-				res.send("Wrong Password");
+				res.send("User '"+req.body.username+"' Not Found");
 			}
 		});
 
@@ -116,26 +141,5 @@ router.get('/logoff',function(req, res, next) {
 	currentSession = undefined;
 	res.send("user logged off");
 });
-
-router.get('/test/:url', function(req, res, next) {
-	var path = req.params.url;
-	var whateverValue;
-	if(path.length < 2){
-		whateverValue = "Chuck Norris is the reason why The Birds are angry";
-	}else if(path.length < 3){
-		whateverValue = "When Alexander Bell invented the telephone he had 3 missed calls from Chuck Norris";
-	}else if(path.length < 4){
-		whateverValue = "Chuck Norris died 20 years ago, Death just hasn't built up the courage to tell him yet.";
-	}else if(path.length < 5){
-		whateverValue = "Chuck Norris has already been to Mars; that's why there are no signs of life.";
-	}else{
-		whateverValue = "Chuck Norris counted to infinity - twice.";
-	}
-	res.render('testing', {title: "Page de test", url : path, whatever : whateverValue, brand:"CsGamesSherby", btn1:"Such Button", btn2:"that-bootstrap", btn3:"GG-NO-RE"})
-	//res.send(req.params.url);
-  //res.render('index', { title: 'Express' });
-});
-
-
 
 module.exports = router;
