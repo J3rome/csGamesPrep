@@ -16,6 +16,7 @@
     "underscore": "~1.5.0",
     "consolidate": "~0.11.0",
     "mongodb": "~1.4.34",
-    "monk": "*"
+    "monk": "*",
+    "password-hash": "*"
   }
 }
