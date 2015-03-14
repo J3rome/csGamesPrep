@@ -9,9 +9,6 @@ body{
 	margin-left: 34%;
 	margin-right: 34%;
 }
-#username{
-	margin: 10px;
-}
-#password{
+#username,#password,#age,#tags,#sex,#description,#interestedIn,#email{
 	margin: 10px;
 }

@@ -25,7 +25,7 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/createAccount">Create Account</a></li>
+        <li><a href="#create">Create Account</a></li>
         <li><a href="#contact">Contact US</a></li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -33,26 +33,27 @@
 </div>
 <section>
 <div class="container ">
-  <div class="text-center">
-    <h1>Welcome to SU</h1>
-    <p class="lead">Super cool dating website</p>
-  </div>
-        <div class="row">
-          <div class="center span4 well">
-            <legend>Please Sign In</legend>
-                <form method="POST" action="" accept-charset="UTF-8">
-                  <input type="text" id="username" class="span4" name="username" placeholder="Username" />
-                  <input type="password" id="password" class="span4" name="password" placeholder="Password" />
-                  <button type="submit" name="submit" class="btn btn-primary btn-block">Sign in</button>
-                </form>
-          </div>
+
+  <div class="row center span4 well" >
+    <legend>Create new account</legend>
+    <form  id="create" method="POST" action="/users" accept-charset="UTF-8">
+      <input type="text" id="username" class="span4" name="username" placeholder="Username" />
+      <input type="text" id="password" class="span4" name="password" placeholder="Password" />
+      <input type="text" id="email" class="span4" name="email" placeholder="Email" />
+      <input type="text" id="age" class="span4" name="age" placeholder="Age" />
+      <input type="text" id="sex" class="span4" name="sex" placeholder="Sex" />
+      <input type="text" id="interestedIn" class="span4" name="interestedIn" placeholder="Interested In" />
+      <input type="text" id="description" class="span4" name="description" placeholder="Description" />
+      <input type="text" id="tags" class="span4" name="tags" placeholder="Tags" />
+        <div>
+          <button class="btn btn-primary center" type="submit">Create Account</button>
+        </div>
+      </form>
     </div>
-  
-</div><!-- /.container -->
+  </div>
 </section>
-	<!-- script references -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="/javascripts/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="../javascripts/bootstrap.js"></script>
-	</body>
+  </body>
 </html>
