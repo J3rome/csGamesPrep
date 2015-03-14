@@ -11,4 +11,5 @@ body{
 }
 #username,#name,#password,#age,#tags,#sex,#description,#interestedIn,#email{
 	margin: 10px;
+	color: #FFC0CB;
 }
