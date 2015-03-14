@@ -6,7 +6,16 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/:url', function(req, res, next) {
+router.get('/users', function(req, res, next) {
+	var db = req.db;
+	var collection = db.get("usercollection");
+	collection.find({},{},function(e,docs){
+		console.log(docs);
+		res.render("users", {userlist: docs});
+	});
+});
+
+router.get('/test/:url', function(req, res, next) {
 	var path = req.params.url;
 	var whateverValue;
 	if(path.length < 2){

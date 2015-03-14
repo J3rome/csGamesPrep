@@ -15,6 +15,6 @@
     "underscore": "~1.5.0",
     "consolidate": "~0.11.0",
     "mongodb": "~1.4.34",
-    "mongoose": "~3.8.25"
+    "monk": "*"
   }
 }
