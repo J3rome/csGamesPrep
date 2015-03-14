@@ -1,0 +1,17 @@
+body{
+	background-color: #F7F7F6;
+}
+.login{
+	padding-top: 65px;
+}
+.center{
+	float: none;
+	margin-left: 34%;
+	margin-right: 34%;
+}
+#username{
+	margin: 10px;
+}
+#password{
+	margin: 10px;
+}
