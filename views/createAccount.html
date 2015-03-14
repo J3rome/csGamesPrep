@@ -38,13 +38,15 @@
     <legend>Create new account</legend>
     <form  id="create" method="POST" action="/users" accept-charset="UTF-8">
       <input type="text" id="username" class="span4" name="username" placeholder="Username" />
-      <input type="text" id="password" class="span4" name="password" placeholder="Password" />
-      <input type="text" id="email" class="span4" name="email" placeholder="Email" />
-      <input type="text" id="age" class="span4" name="age" placeholder="Age" />
-      <input type="text" id="sex" class="span4" name="sex" placeholder="Sex" />
-      <input type="text" id="interestedIn" class="span4" name="interestedIn" placeholder="Interested In" />
-      <input type="text" id="description" class="span4" name="description" placeholder="Description" />
-      <input type="text" id="tags" class="span4" name="tags" placeholder="Tags" />
+      <input type="text" id="name" class="span4" name="name" placeholder="Name" />
+      <input type="password" id="password" class="span4" name="password" placeholder="Password" />
+      <input type="email" id="email" class="span4" name="email" placeholder="Email" />
+      <input type="text" id="age" class="span4" name="age" placeholder="Age" /><br>
+      <input type="radio" id="sex"  name="sex" value="male" checked> Male 
+      <input type="radio" id="sex"  name="sex" value="Female"> Female<br>
+      <textarea id="interestedIn" class="span4" name="interestedIn" placeholder="Interested In" ></textarea>
+      <textarea type="textarea" id="description" class="span4" name="description" placeholder="Description" ></textarea>
+      <textarea type="textarea" id="tags" class="span4" name="tags" placeholder="Tags" ></textarea>
         <div>
           <button class="btn btn-primary center" type="submit">Create Account</button>
         </div>
